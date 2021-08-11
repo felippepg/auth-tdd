@@ -1,13 +1,11 @@
-const { Model, DataTypes } = require("sequelize/types");
+const { Model, DataTypes } = require('sequelize');
 
 class User extends Model {
     static init(connection) {
         super.init({
             name: DataTypes.STRING,
             email: DataTypes.STRING,
-            passwordHash: DataTypes.STRING
-        }, {
-            tableName: 'users'
+            password_hash: DataTypes.STRING
         }, {
             sequelize: connection
         })

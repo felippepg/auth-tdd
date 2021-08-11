@@ -6,6 +6,8 @@ const express = require('express');
 class App {
     constructor() {
         this.express = express();
+        this.middlewares()
+        this.routes()
     }
 
     middlewares() {
@@ -14,6 +16,7 @@ class App {
 
     routes() {
         this.express.route(require('./routes'));
+        return this.routes
     }
 }
 
