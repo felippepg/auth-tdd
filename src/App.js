@@ -1,7 +1,4 @@
-require('dotenv').config({
-    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
-});
-
+const { urlencoded } = require('express');
 const express = require('express');
 class App {
     constructor() {
@@ -12,11 +9,11 @@ class App {
 
     middlewares() {
         this.express.use(express.json());
+        this.express.use(express.urlencoded({ extended: true }))
     }
 
     routes() {
-        this.express.route(require('./routes'));
-        return this.routes
+        this.express.use(require('./routes/index'));
     }
 }
 
