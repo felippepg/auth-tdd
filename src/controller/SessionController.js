@@ -2,7 +2,7 @@ const User = require("../models/Users");
 const bcrypt = require('bcryptjs');
 
 module.exports = {
-    index: async (request, response) => {
+    login: async (request, response) => {
 
         const { email, password } = request.body;
         const user = await User.findOne({ where: { email } });
@@ -21,5 +21,16 @@ module.exports = {
             user,
             token: User.generateToken(user.id)
         })
+    },
+
+    create_user: async (request, response) => {
+        const { name, email, password } = request.body;
+        const user = await User.create({ name, email, password })
+
+        return response.status(200).send(user)
+    },
+
+    dashboard: (request, response) => {
+        return response.json({ message: 'welcome ' })
     }
 }
